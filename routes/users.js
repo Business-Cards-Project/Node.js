@@ -42,7 +42,7 @@ router.get("/userInfo", authToken, async (req, res) => {
   }
 })
 
-router.get("/userCards", authToken, async (req, res) => {
+router.get("/userFavoritesCards", authToken, async (req, res) => {
   try {
     let user = await UserModel.findOne({
       _id: req.tokenData._id
@@ -136,8 +136,8 @@ router.post("/login", async (req, res) => {
   }
 })
 
-router.get("/authUser" , authToken , (req,res) => {
-  res.json({status:"ok"});
+router.get("/authUser", authToken, (req, res) => {
+  res.json({ status: "ok" });
 })
 
 

@@ -34,8 +34,8 @@ router.get("/userCardsAdded", authToken, async (req, res) => {
     let sort = (req.query.sort) ? req.query.sort : "_id";
     let reverse = (req.query.reverse == "yes") ? -1 : 1;
     let data = await CardModel.find({
-        user_id: req.tokenData._id
-      })
+      user_id: req.tokenData._id
+    })
       .limit(perPage)
       .skip(page * perPage)
       .sort({
@@ -98,5 +98,18 @@ router.put("/:idEdit", authToken, async (req, res) => {
     res.status(400).json(err);
   }
 })
+
+
+router.get("/totalCards", async (req, res) => {
+  try {
+    let data = await CardModel.countDocuments({});
+    res.json({ count: data })
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+
+})
+
 
 module.exports = router;
