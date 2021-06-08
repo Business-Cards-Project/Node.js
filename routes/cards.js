@@ -99,6 +99,17 @@ router.put("/:idEdit", authToken, async (req, res) => {
   }
 })
 
+router.get("/single/:cardId", async (req, res) => {
+  try {
+    let cardId = req.params.cardId;
+    let card = await CardModel.findOne({ _id: cardId });
+    res.json(card);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err)
+
+  }
+})
 
 router.get("/totalCards", async (req, res) => {
   try {
